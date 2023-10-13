@@ -1,0 +1,11 @@
+tokenizer_path: gslm_tokenizer/tokenizer.json
+dataset:
+  folder: /mnt/hdd/GSLM/
+  pattern: extracted_feature.split_*
+output_json:
+  train: /mnt/hdd/GSLM/train.jsonl
+  valid: /mnt/hdd/GSLM/valid.jsonl
+  test: /mnt/hdd/GSLM/test.jsonl
+num_data:
+  valid: 1000
+  test: 1000

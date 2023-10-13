@@ -1,0 +1,17 @@
+dataset:
+  __target__: gslm.preprocess.preprocess_dataset.GlobWavDataset
+  roots: ["/mnt/hdd/datasets/VCTK-Corpus/wav48/"]
+  patterns: ["**/*.wav"]
+  shuffled: False
+speech_ssl:
+  model_path: rinna/japanese-hubert-base
+kmeans:
+  model_path: kmeans_centroids.npy
+  cfg:
+    k: 100
+    niter: 1000
+    verbose: True
+    seed: 1234
+    nredo: 1
+layer: 6
+feature_output_path: /mnt/hdd/GSLM/feature-%06d.tar.gz
