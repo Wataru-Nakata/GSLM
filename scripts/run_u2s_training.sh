@@ -11,4 +11,4 @@ module load nccl/2.18/2.18.1-1
 source venv/bin/activate
 pip install -r requirements-dev.lock
 cd examples
-python3 train_u2s.py u2s.dataodule=abci
+python3 train_u2s.py u2s.datamodule=abci
