@@ -33,7 +33,6 @@ deepdiff==6.6.0
 dill==0.3.7
 docker-pycreds==0.4.0
 exceptiongroup==1.1.3
-faiss @ file:///home/wnakata/GSLM/../faiss/build/faiss/python
 fastapi==0.103.2
 filelock==3.12.4
 frozenlist==1.4.0
