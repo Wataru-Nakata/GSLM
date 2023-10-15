@@ -6,6 +6,7 @@ from torch.nn.utils.rnn import pad_sequence
 import random
 import torch
 import hydra
+from torchaudio._extension import torchaudio
 
 
 class u2sDataModule(LightningDataModule):
@@ -18,6 +19,12 @@ class u2sDataModule(LightningDataModule):
         self.val_dataset = hydra.utils.instantiate(
             self.cfg.val_dataset
         )
+        if 'xvector' in cfg.keys():
+            self.xvector_model = hydra.utils.instantiate(cfg.xvector.model)
+            self.xvector_sr = cfg.xvector.sr
+        else:
+            self.xvector_model = None
+            self.xvector_sr = None
 
     def train_dataloader(self):
         return DataLoader(
@@ -48,6 +55,18 @@ class u2sDataModule(LightningDataModule):
         ]
 
         outputs = dict()
+
+        if self.xvector_model is not None:
+            embeddings = []
+            for sample in batch:
+                wav = sample['resampled_speech.pth']
+                wav_xvector = torchaudio.functional.resample(wav,self.cfg.sample_rate,self.xvector_sr)
+                xvector = self.xvector_model.encode_batch(wav_xvector.unsqueeze(0))
+                embedding_size = xvector.size(-1)
+                embeddings.append(xvector.squeeze(0))
+            outputs['xvector'] = torch.stack(embeddings).view(-1,embedding_size)
+            print(outputs["xvector"].size())
+
         if segment_size != -1:
             cropped_speeches = []
             input_features = []

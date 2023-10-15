@@ -2,7 +2,7 @@ defaults:
  - datamodule: default
   
 lightning_module:
-  _target_: gslm.u2s.hifigan.lightning_module.HiFiGANEmbeddingLightningModule
+  _target_: gslm.u2s.hifigan.lightning_module.HiFiGANEmbeddingXvectorLightningModule
   _recursive_: false
   cfg:
     sample_rate: 22_050
@@ -23,6 +23,7 @@ lightning_module:
         mel_scale: "slaney"
     model:
       generator:
+        xvector_dim: 512
         num_tokens: 100
         num_input_channels: 512
         upsample_rates: [7,7,3,3]
