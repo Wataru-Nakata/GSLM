@@ -16,7 +16,7 @@ cfg:
     segment_size:
       train: 50
       val: -1
-    train_batch_size: 2
+    train_batch_size: 16
     val_batch_size: 1
     target_feature: 
       key: input_feature
