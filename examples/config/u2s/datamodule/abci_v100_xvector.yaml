@@ -4,14 +4,14 @@ cfg:
   sample_rate: 22_050
   train_dataset:
     _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
-    manifest_path: /scratch/acc12576tt/GSLM/manifest.txt
+    manifest_path: /mnt/hdd/GSLM/manifest_train.txt
     resampled_sr: 22_050
-    extracted_feature_path: /scratch/acc12576tt/GSLM/extracted_feature.txt
+    extracted_feature_path: /mnt/hdd/GSLM/extracted_feature.txt
   val_dataset:
     _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
-    manifest_path: /scratch/acc12576tt/GSLM/manifest.txt
+    manifest_path: /mnt/hdd/GSLM/manifest_valid.txt
     resampled_sr: 22_050
-    extracted_feature_path: /scratch/acc12576tt/GSLM/extracted_feature.txt
+    extracted_feature_path: /mnt/hdd/GSLM/extracted_feature.txt
   data:
     segment_size:
       train: 50

@@ -1,13 +1,20 @@
 from torch.utils.data import DataLoader
-from gslm.preprocess.kmeans_model import ExtractSSLFeatures, KmeansModel
 from gslm.preprocess.preprocess_dataset import GlobWavDataset
+from gslm.s2u.tokenizer import SSLKmeansTokenizer
 from omegaconf import DictConfig
-import webdataset
 import torchaudio
 import hydra
 import numpy as np
 from tqdm import tqdm
 import torch
+
+def collate_fn(batch):
+    wav_id = [b[0] for b in batch]
+    wav = [b[1][0].view(-1) for b in batch]
+    sr = [b[1][1] for b in batch]
+    wav_path = [b[2] for b in batch]
+    wav = torch.nn.utils.rnn.pad_sequence(wav,batch_first=True)
+    return wav_id, (wav,sr), wav_path
 
 @hydra.main(config_path='config', config_name='config',version_base=None)
 @torch.inference_mode()
@@ -19,33 +26,16 @@ def main(cfg:DictConfig):
         False,False
     )
 
-    dl = DataLoader(dataset,1,num_workers=8)
-
-    ssl_model = ExtractSSLFeatures(cfg.preprocess).to(device)
-    sink = webdataset.ShardWriter(cfg.preprocess.feature_output_path)
+    dl = DataLoader(dataset,batch_size=cfg.s2u.tokenizer.batch_size,num_workers=8,collate_fn=collate_fn)
+    kmeans_model = SSLKmeansTokenizer(cfg.s2u.tokenizer)
+    kmeans_model.to(device)
     features = []
     for idx,batch in enumerate(tqdm(dl)):
         wav_id, (wav,sr), wav_path = batch
         wav = wav.to(device)
-        assert wav.size(1) == 1
-        wav_16k = torchaudio.functional.resample(wav,sr,16_000)
-        wav_16k = wav_16k.view(1,-1)
-        outputs = ssl_model(wav_16k)
-        feature_size = outputs.size(2)
-        feature = outputs.view(-1,feature_size)
-        features.extend(feature.cpu().numpy())
-        sink.write(
-            {
-                "__key__": str(wav_id),
-                "wav_path.txt": str(wav_path),
-                "feature.pth": webdataset.torch_dumps(feature.cpu())
-            }
-        )
-    sink.close()
-    kmeans_model = KmeansModel(cfg.preprocess,feature_size)
-    feature = np.stack(features)
-    print(feature.shape)
-    kmeans_model.train(feature)
-    kmeans_model.save()
+        wav_16k = torchaudio.functional.resample(wav,sr[0],16_000)
+        kmeans_model.train_one_iter(wav_16k)
+        
+    kmeans_model.save(cfg.s2u.tokenizer.save_path)
 if __name__ == "__main__":
     main()

@@ -3,3 +3,4 @@ defaults:
   - preprocess: default
   - ulm: default
   - u2s: default
+  - s2u: default

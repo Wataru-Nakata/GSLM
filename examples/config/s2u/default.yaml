@@ -1,0 +1,12 @@
+tokenizer:
+  ssl_model_name: 'rinna/japanese-hubert-base'
+  ssl_layer: 6
+  kmeans:
+    n_clusters: 100
+    verbose: 1
+  batch_size: 16
+  save_path: tokenier.pkl
+
+
+layer: 6
+feature_output_path: /mnt/hdd/GSLM/feature-%06d.tar.gz

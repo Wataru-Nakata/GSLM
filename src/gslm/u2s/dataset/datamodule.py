@@ -25,6 +25,10 @@ class u2sDataModule(LightningDataModule):
         else:
             self.xvector_model = None
             self.xvector_sr = None
+        if 'use_pitch' in cfg.keys():
+            self.use_pitch = cfg.use_pitch
+        else:
+            self.use_pitch = False
 
     def train_dataloader(self):
         return DataLoader(
@@ -65,15 +69,31 @@ class u2sDataModule(LightningDataModule):
                 embedding_size = xvector.size(-1)
                 embeddings.append(xvector.squeeze(0))
             outputs['xvector'] = torch.stack(embeddings).view(-1,embedding_size)
-            print(outputs["xvector"].size())
+        if self.use_pitch:
+            import pyworld 
+            import numpy as np
+            logf0s = []
+            for sample in batch:
+                wav = sample['resampled_speech.pth']
+                cut_samples = int(self.cfg.data.target_feature.bias*self.cfg.sample_rate)
+                wav = wav[cut_samples:-cut_samples]
+                # wav = torch.cat((padding_tensor,wav),dim=0)
+                # wav = torch.cat((wav,padding_tensor),dim=0)
+                sr = self.cfg.sample_rate
+                _f0, time = pyworld.dio(wav.view(-1).numpy().astype(np.double),sr,frame_period=20)
+                f0 = pyworld.stonemask(wav.view(-1).numpy().astype(np.double), _f0, time, sr)
+                f0 = torch.log10(torch.from_numpy(f0).float())
+                logf0s.append(f0[1:].view(-1))
 
         if segment_size != -1:
             cropped_speeches = []
             input_features = []
-            for sample in batch:
+            for idx,sample in enumerate(batch):
                 wav = sample["resampled_speech.pth"]
                 input_feature= sample[self.cfg.data.target_feature.key]
                 feature_len = input_feature.size(0)
+                if self.use_pitch:
+                    assert feature_len == logf0s[idx].size(0)
                 if feature_len > (segment_size+1):
                     feature_start = random.randint(
                         0, feature_len - segment_size - 1
@@ -91,6 +111,8 @@ class u2sDataModule(LightningDataModule):
                             feature_start:feature_end
                         ]
                     )
+                    if self.use_pitch:
+                        logf0s[idx] = logf0s[idx][feature_start:feature_end]
                 else:
                     cropped_speeches.append(wav.squeeze())
                     input_features.append(
@@ -110,6 +132,7 @@ class u2sDataModule(LightningDataModule):
                 [b["input_feature"] for b in batch], batch_first=True
             )
         
+        outputs['lf0'] = pad_sequence(logf0s,batch_first=True)
         outputs["wav_lens"] = torch.tensor(
             [b["resampled_speech.pth"].size(0) for b in batch]
         )
