@@ -61,7 +61,6 @@ lightning_module:
 trainer:
   _target_: lightning.Trainer
   accelerator: "gpu"
-  devices: [0]
   precision: 32
   check_val_every_n_epoch: 1
   max_epochs: 3300

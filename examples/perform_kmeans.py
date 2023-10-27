@@ -32,7 +32,7 @@ def main(cfg:DictConfig):
     features = []
     for idx,batch in enumerate(tqdm(dl)):
         wav_id, (wav,sr), wav_path = batch
-        wav = wav.to(device)
+        wav = wav[:,:sr*3].to(device) # cut first 3 seconds
         wav_16k = torchaudio.functional.resample(wav,sr[0],16_000)
         kmeans_model.train_one_iter(wav_16k)
         
