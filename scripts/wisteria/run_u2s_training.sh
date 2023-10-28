@@ -6,4 +6,5 @@
 module load gcc/8.3.1
 module load python/3.8.12
 source venv/bin/activate
+cd examples
 python3 train_u2s.py u2s/datamodule=wisteria_jvs
