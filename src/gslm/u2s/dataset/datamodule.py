@@ -37,6 +37,7 @@ class u2sDataModule(LightningDataModule):
             collate_fn=lambda batch: self.collate_fn(
                 batch, self.cfg.data.segment_size.train
             ),
+            shuffle=True,
             num_workers=20,
         )
     def val_dataloader(self):
@@ -46,6 +47,7 @@ class u2sDataModule(LightningDataModule):
             collate_fn=lambda batch: self.collate_fn(
                 batch, self.cfg.data.segment_size.val
             ),
+            shuffle=True,
             num_workers=20,
         )
     @torch.no_grad()
@@ -132,7 +134,8 @@ class u2sDataModule(LightningDataModule):
                 [b["input_feature"] for b in batch], batch_first=True
             )
         
-        outputs['lf0'] = pad_sequence(logf0s,batch_first=True)
+        if self.use_pitch:
+            outputs['lf0'] = pad_sequence(logf0s,batch_first=True)
         outputs["wav_lens"] = torch.tensor(
             [b["resampled_speech.pth"].size(0) for b in batch]
         )

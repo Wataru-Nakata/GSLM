@@ -1,0 +1,30 @@
+_target_: gslm.u2s.dataset.datamodule.u2sDataModule
+_recursive_: false
+cfg:
+  sample_rate: 22_050
+  train_dataset:
+    _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
+    manifest_path: /mnt/hdd/datasets/libritts/manifest_train.txt
+    resampled_sr: 22_050
+    extracted_feature_path: /mnt/hdd/datasets/libritts/hubert_quantized_train.txt
+  val_dataset:
+    _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
+    manifest_path: /mnt/hdd/datasets/libritts/manifest_dev.txt
+    resampled_sr: 22_050
+    extracted_feature_path: /mnt/hdd/datasets/libritts/hubert_quantized_dev.txt
+  data:
+    segment_size:
+      train: 50
+      val: -1
+    train_batch_size: 24
+    val_batch_size: 1
+    target_feature: 
+      key: input_feature
+      samples_per_sec: 50
+      bias: 0.0025
+  xvector:
+    model:
+      _target_: speechbrain.pretrained.EncoderClassifier.from_hparams
+      source: "speechbrain/spkrec-xvect-voxceleb"
+    sr: 16_000
+  use_pitch: true

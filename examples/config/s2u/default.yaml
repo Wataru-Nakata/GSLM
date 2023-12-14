@@ -2,11 +2,12 @@ tokenizer:
   ssl_model_name: 'rinna/japanese-hubert-base'
   ssl_layer: 6
   kmeans:
-    n_clusters: 100
+    n_clusters: 500
     verbose: 1
     reassignment_ratio: 0.5
     n_init: 200
-  batch_size: 16
+    batch_size: 10000
+  batch_size: 128
   save_path: tokenier.pkl
 
 

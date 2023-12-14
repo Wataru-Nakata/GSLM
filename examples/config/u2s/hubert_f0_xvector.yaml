@@ -1,7 +1,7 @@
 defaults:
  - datamodule: defaulthubert
 lightning_module:
-  _target_: gslm.u2s.hifigan.lightning_module.HiFiGANEmbeddingLightningModule
+  _target_: gslm.u2s.hifigan.lightning_module.HiFiGANXvectorF0LightningModule
   _recursive_: false
   cfg:
     sample_rate: 22_050

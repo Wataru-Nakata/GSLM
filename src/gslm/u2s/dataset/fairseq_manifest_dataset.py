@@ -32,6 +32,6 @@ class FairseqManifestDataset(Dataset):
         wav,sr = torchaudio.load(wav_path)
         assert wav.size(0) == 1
         resampled_wav = torchaudio.functional.resample(wav,sr,self.resampled_sr)
-        feature = torch.tensor(self.feature[wav_path.stem]).view(-1)
+        feature = torch.tensor(self.feature[wav_file]).view(-1)
         return resampled_wav.view(-1),feature,wav_path.stem
 
