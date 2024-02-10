@@ -1,5 +1,5 @@
 from tokenizers.models import WordLevel
-from tokenizers.pre_tokenizers import Whitespace
+from tokenizers.pre_tokenizers import WhitespaceSplit
 from tokenizers import Tokenizer
 import hydra
 from pathlib import Path
@@ -10,17 +10,18 @@ import json
 def prepare_tokenizer(cfg):
     vocab = {
         "<s>": 0,
+        "</s>": 1,
     }
-    num_k_means_cluster = cfg.preprocess.kmeans.cfg.k
+    num_k_means_cluster = 1000
 
     for i in range(num_k_means_cluster):
-        vocab[f"{i}"] = i + 1
+        vocab[f"{i}"] = i + 2
     vocab['[UNK]'] = len(vocab.keys())
-    pretokenizer = Whitespace()
+    pretokenizer = WhitespaceSplit()
     model = WordLevel(vocab=vocab,unk_token="[UNK]")
     tokenizer = Tokenizer(model=model)
     tokenizer.pre_tokenizer = pretokenizer
-    
+    print(tokenizer.encode("<s> 22 344 </s>").tokens)
     tokenizer.save(cfg.ulm.tokenizer_path)
 @hydra.main(config_path='config', config_name='config',version_base=None)
 def prepare_dataset_as_json(cfg):
@@ -28,23 +29,19 @@ def prepare_dataset_as_json(cfg):
     train_json_stream = Path(cfg.ulm.output_json.train).open('w')
     valid_json_stream = Path(cfg.ulm.output_json.valid).open('w')
     test_json_stream = Path(cfg.ulm.output_json.test).open('w')
-    data_count = 0
-    output_stream = test_json_stream
-    for dataset_file in dataset_folder.glob(cfg.ulm.dataset.pattern):
+    train_dataset_files = dataset_folder /cfg.ulm.dataset.train.pattern
+    dev_dataset_files = dataset_folder/ cfg.ulm.dataset.dev.pattern
+    test_dataset_files = dataset_folder/ cfg.ulm.dataset.test.pattern
+    for output_stream,dataset_file in [(train_json_stream,train_dataset_files),(valid_json_stream,dev_dataset_files),(test_json_stream,test_dataset_files)]:
         with dataset_file.open() as f:
             for line in  f.readlines():
-                if data_count > cfg.ulm.num_data.test:
-                    output_stream = valid_json_stream
-                if data_count > cfg.ulm.num_data.test + cfg.ulm.num_data.valid:
-                    output_stream = train_json_stream
                 data = line.strip().split('|')[-1]
                 output_stream.write(
                     json.dumps(
-                        {'text':f"<s> {data}"}
+                        {'text':f"<s> {data} </s>"}
                     )
                 )
                 output_stream.write('\n')
-                data_count += 1
     train_json_stream.close()
     valid_json_stream.close()
     test_json_stream.close()

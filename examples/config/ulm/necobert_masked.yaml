@@ -1,0 +1,18 @@
+tokenizer_path: gslm_tokenizer_hubert/tokenizer.json
+dataset:
+  folder: /mnt/hdd/datasets/libritts/
+  train:
+    pattern: necobert_quantized_masked_train.txt
+  dev:
+    pattern: necobert_quantized_masked_dev.txt
+  test:
+    pattern: necobert_quantized_masked_test.txt
+output_json_tts:
+  train: /mnt/hdd/GSLM/train_necobert_masked_tts.jsonl
+  valid: /mnt/hdd/GSLM/valid_necobert_masked_tts.jsonl
+  test: /mnt/hdd/GSLM/test_necobert_masked_tts.jsonl
+
+output_json:
+  train: /mnt/hdd/GSLM/train_necobert_masked.jsonl
+  valid: /mnt/hdd/GSLM/valid_necobert_masked.jsonl
+  test: /mnt/hdd/GSLM/test_necobert_masked.jsonl
