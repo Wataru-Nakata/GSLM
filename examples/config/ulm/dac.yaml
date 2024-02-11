@@ -15,3 +15,10 @@ output_json:
   train: /mnt/hdd/GSLM/train_dac.jsonl
   valid: /mnt/hdd/GSLM/valid_dac.jsonl
   test: /mnt/hdd/GSLM/test_dac.jsonl
+
+librilight:
+  manifest_root: /home/wnakata/librilight_cleaning/notebooks/output/
+  manifest_pattern: libriheavy_cuts_*.jsonl.gz
+  feature_root: /home/wnakata/GSLM/fairseq_manifest/
+  feature_pattern: libriheavy_cuts_*.txt_dac_quantized_l0_km1000.feature
+  output_jsonl_path: ???

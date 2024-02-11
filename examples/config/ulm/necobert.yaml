@@ -20,5 +20,5 @@ librilight:
   manifest_root: /home/wnakata/librilight_cleaning/notebooks/output/
   manifest_pattern: libriheavy_cuts_*.jsonl.gz
   feature_root: /home/wnakata/GSLM/fairseq_manifest/
-  feature_pattern: libriheavy_cuts_*.txt_necobert_quantized_l6_km1000.feature
+  feature_pattern: libriheavy_cuts_*.txt_necobert_masked_quantized_l12_km1000.feature
   output_jsonl_path: ???
