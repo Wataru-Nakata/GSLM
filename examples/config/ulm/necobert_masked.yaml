@@ -16,3 +16,10 @@ output_json:
   train: /mnt/hdd/GSLM/train_necobert_masked.jsonl
   valid: /mnt/hdd/GSLM/valid_necobert_masked.jsonl
   test: /mnt/hdd/GSLM/test_necobert_masked.jsonl
+
+librilight:
+  manifest_root: /home/wnakata/librilight_cleaning/notebooks/output/
+  manifest_pattern: libriheavy_cuts_*.jsonl.gz
+  feature_root: /home/wnakata/GSLM/fairseq_manifest/
+  feature_pattern: libriheavy_cuts_*.txt_necobert_masked_quantized_l6_km1000.feature
+  output_jsonl_path: ???
