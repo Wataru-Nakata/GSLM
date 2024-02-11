@@ -15,3 +15,7 @@ output_json:
   train: /mnt/hdd/GSLM/train_hubert.jsonl
   valid: /mnt/hdd/GSLM/valid_hubert.jsonl
   test: /mnt/hdd/GSLM/test_hubert.jsonl
+librilight:
+  manifest: /home/wnakata/librilight_cleaning/notebooks/output/libriheavy_cuts_0.jsonl.gz
+  feature_path: /home/wnakata/GSLM/fairseq_manifest/libriheavy_cuts_0.txt_hubert_quantized_l6_km1000.feature
+  output_jsonl_path: ???

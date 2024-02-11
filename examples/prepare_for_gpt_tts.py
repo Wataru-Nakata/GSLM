@@ -70,13 +70,12 @@ def prepare_dataset_as_json(cfg):
 
             for speaker in tqdm(speech_by_speaker.keys()):
                 for speech in speech_by_speaker[speaker]:
-                    for i in range(10):
-                        same_speaker_speeches = speech_by_speaker[speaker]
-                        if len(same_speaker_speeches) == 1:
+                    same_speaker_speeches = speech_by_speaker[speaker]
+                    if len(same_speaker_speeches) == 1:
+                        continue
+                    for random_speech in random.choices(same_speaker_speeches,k=10):
+                        if random_speech['wav_path'] == speech['wav_path']:
                             continue
-                        random_speech = random.choice(same_speaker_speeches)
-                        while random_speech['wav_path'] == speech['wav_path']:
-                            random_speech = random.choice(same_speaker_speeches)
                         prompt_phones = random_speech['phones']
                         prompt_data = random_speech['data']
                         data = speech['data']
