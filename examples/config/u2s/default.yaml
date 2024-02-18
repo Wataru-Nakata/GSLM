@@ -67,3 +67,4 @@ logger:
   - _target_: lightning.pytorch.loggers.WandbLogger
     project: "u2s"
     log_model: "all"
+ckpt_path:

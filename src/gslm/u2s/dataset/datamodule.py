@@ -38,7 +38,7 @@ class u2sDataModule(LightningDataModule):
                 batch, self.cfg.data.segment_size.train
             ),
             shuffle=True,
-            num_workers=20,
+            num_workers=9,
         )
     def val_dataloader(self):
         return DataLoader(
@@ -48,7 +48,7 @@ class u2sDataModule(LightningDataModule):
                 batch, self.cfg.data.segment_size.val
             ),
             shuffle=True,
-            num_workers=20,
+            num_workers=9,
         )
     @torch.no_grad()
     def collate_fn(self, batch, segment_size: int = -1):

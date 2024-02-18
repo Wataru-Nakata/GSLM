@@ -4,19 +4,19 @@ cfg:
   sample_rate: 22_050
   train_dataset:
     _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
-    manifest_path: /mnt/hdd/datasets/libritts/manifest_train.txt
+    manifest_path: /work/ge43/e43001/datasets/libritts/manifest_train.txt
     resampled_sr: 22_050
-    extracted_feature_path: /mnt/hdd/datasets/libritts/hubert_quantized_train.txt
+    extracted_feature_path: /work/ge43/e43001/datasets/libritts/hubert_quantized_train.txt
   val_dataset:
     _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
-    manifest_path: /mnt/hdd/datasets/libritts/manifest_dev.txt
+    manifest_path: /work/ge43/e43001/datasets/libritts/manifest_dev.txt
     resampled_sr: 22_050
-    extracted_feature_path: /mnt/hdd/datasets/libritts/hubert_quantized_dev.txt
+    extracted_feature_path: /work/ge43/e43001/datasets/libritts/hubert_quantized_dev.txt
   data:
     segment_size:
       train: 50
       val: -1
-    train_batch_size: 24
+    train_batch_size: 32
     val_batch_size: 1
     target_feature: 
       key: input_feature
