@@ -8,14 +8,14 @@ dataset:
   test:
     pattern: necobert_quantized_masked_test.txt
 output_json_tts:
-  train: /mnt/hdd/GSLM/train_necobert_masked_tts.jsonl
-  valid: /mnt/hdd/GSLM/valid_necobert_masked_tts.jsonl
-  test: /mnt/hdd/GSLM/test_necobert_masked_tts.jsonl
+  train: /mnt/hdd/GSLM/train_necobert_masked_tts0215.jsonl
+  valid: /mnt/hdd/GSLM/valid_necobert_masked_tts0215.jsonl
+  test: /mnt/hdd/GSLM/test_necobert_masked_tts0215.jsonl
 
 output_json:
-  train: /mnt/hdd/GSLM/train_necobert_masked.jsonl
-  valid: /mnt/hdd/GSLM/valid_necobert_masked.jsonl
-  test: /mnt/hdd/GSLM/test_necobert_masked.jsonl
+  train: /mnt/hdd/GSLM/train_necobert_masked0215.jsonl
+  valid: /mnt/hdd/GSLM/valid_necobert_masked0215.jsonl
+  test: /mnt/hdd/GSLM/test_necobert_masked0215.jsonl
 
 librilight:
   manifest_root: /home/wnakata/librilight_cleaning/notebooks/output/
@@ -23,3 +23,8 @@ librilight:
   feature_root: /home/wnakata/GSLM/fairseq_manifest/
   feature_pattern: libriheavy_cuts_*.txt_necobert_masked_quantized_l12_km1000.feature
   output_jsonl_path: ???
+
+ljspeech:
+  manifest_root: /mnt/hdd/datasets/LJSpeech-1.1/
+  feature_file_suffix: txt_necobert_masked_quantized_l12_km1000.feature
+  dataset_path: lj_speech_necobert_masked/
