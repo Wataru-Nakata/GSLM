@@ -8,7 +8,7 @@ def main(cfg):
 
     loggers = hydra.utils.instantiate(cfg.u2s.logger)
     trainer = hydra.utils.instantiate(cfg.u2s.trainer,logger=loggers)
-    trainer.fit(lightning_module,datamodule)
+    trainer.fit(lightning_module,datamodule,ckpt_path=cfg.u2s.ckpt_path)
 
 if __name__ == '__main__':
     main()
