@@ -16,6 +16,10 @@ output_json:
   valid: /mnt/hdd/GSLM/valid_dac.jsonl
   test: /mnt/hdd/GSLM/test_dac.jsonl
 
+output_json_tts_t5:
+  train: dac_libri/train.jsonl
+  valid: dac_libri/dev.jsonl
+  test:  dac_libri/test.jsonl
 librilight:
   manifest_root: /home/wnakata/librilight_cleaning/notebooks/output/
   manifest_pattern: libriheavy_cuts_*.jsonl.gz

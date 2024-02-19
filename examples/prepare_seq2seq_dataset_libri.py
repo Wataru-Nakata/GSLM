@@ -1,42 +1,18 @@
-from tokenizers.models import WordLevel
-from tokenizers.pre_tokenizers import WhitespaceSplit
-from tokenizers import Tokenizer
 import hydra
 from pathlib import Path
+import pandas as pd
 import json
-import phonemizer
 from phonemizer.backend import EspeakBackend
 from tqdm import tqdm
 import random
 
-unique_phones = set()
-
 @hydra.main(config_path='config', config_name='config',version_base=None)
-def prepare_tokenizer(cfg):
-    vocab = {
-        "<s>": 0,
-        "</s>": 1,
-        "[SEP]": 2
-    }
-    num_k_means_cluster = 1000
-
-    for i in range(num_k_means_cluster):
-        vocab[f"{i}"] = i + 3
-    for i in range(len(unique_phones)):
-        vocab[f"{unique_phones.pop()}"] = i + 3 + num_k_means_cluster
-    vocab['[UNK]'] = len(vocab.keys())
-    pretokenizer = WhitespaceSplit()
-    model = WordLevel(vocab=vocab,unk_token="[UNK]")
-    tokenizer = Tokenizer(model=model)
-    tokenizer.pre_tokenizer = pretokenizer
-    print(tokenizer.encode("<s> 22 344 </s>").tokens)
-    tokenizer.save(cfg.ulm.tokenizer_path)
-@hydra.main(config_path='config', config_name='config',version_base=None)
-def prepare_dataset_as_json(cfg):
+def main(cfg):
     dataset_folder = Path(cfg.ulm.dataset.folder)
-    train_json_stream = Path(cfg.ulm.output_json_tts.train).open('w')
-    valid_json_stream = Path(cfg.ulm.output_json_tts.valid).open('w')
-    test_json_stream = Path(cfg.ulm.output_json_tts.test).open('w')
+    Path(cfg.ulm.output_json_tts_t5.train).parent.mkdir(exist_ok=True,parents=True)
+    train_json_stream = Path(cfg.ulm.output_json_tts_t5.train).open('w')
+    valid_json_stream = Path(cfg.ulm.output_json_tts_t5.valid).open('w')
+    test_json_stream = Path(cfg.ulm.output_json_tts_t5.test).open('w')
     root = Path("/mnt/hdd/datasets/libritts")
     train_dataset_files = dataset_folder /cfg.ulm.dataset.train.pattern
     dev_dataset_files = dataset_folder/ cfg.ulm.dataset.dev.pattern
@@ -53,8 +29,8 @@ def prepare_dataset_as_json(cfg):
                     normalized_text = f.read().strip()
                     phones = backend.phonemize([normalized_text])[0]
                     phones = phones.replace(' ','|')
-                    [unique_phones.add(p) for p in phones]
                 speeches[path] = {
+                    'id': wav_path.stem,
                     'wav_path':wav_path,
                     'text':normalized_text,
                     'phones':phones,
@@ -80,20 +56,22 @@ def prepare_dataset_as_json(cfg):
                         prompt_data = random_speech['data']
                         data = speech['data']
                         phones = speech['phones']
+                        speech_prompt = " ".join([f"speech_{y}" for y in prompt_data.split(' ')])
                         output_stream.write(
                             json.dumps(
-                                {'text':f"<s> {prompt_data} [SEP] {' '.join(list(phones))} [SEP] {data} </s>"}
+                                {
+                                    'phones':f"{speech_prompt} <extra_id_0> {' '.join(list(phones))}",
+                                    'feature': f"{data}",
+                                    'id' :speech['id'],
+                                    'prompt_data': random_speech['id'],
+                                    'orig_text': speech['text'],
+                                    'orig_prompt_text': random_speech['text'],
+                                }
                             ,ensure_ascii=False)
                         )
                         output_stream.write('\n')
     train_json_stream.close()
     valid_json_stream.close()
     test_json_stream.close()
-    return unique_phones
-
-
-
 if __name__ == "__main__":
-    phones = prepare_dataset_as_json()
-    print(unique_phones)
-    prepare_tokenizer()
+    main()

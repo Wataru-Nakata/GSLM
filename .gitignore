@@ -171,3 +171,5 @@ notebooks/
 tts*/
 u2s_weights/
 ulm_*/
+*.json
+*.jsonl

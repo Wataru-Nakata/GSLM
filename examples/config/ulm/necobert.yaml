@@ -11,6 +11,10 @@ output_json_tts:
   train: /mnt/hdd/GSLM/train_necobert_tts0215.jsonl
   valid: /mnt/hdd/GSLM/valid_necobert_tts0215.jsonl
   test: /mnt/hdd/GSLM/test_necobert_tts0215.jsonl
+output_json_tts_t5:
+  train: necobert_libri/train.jsonl
+  valid: necobert_libri/dev.jsonl
+  test:  necobert_libri/test.jsonl
 
 output_json:
   train: /mnt/hdd/GSLM/train_necobert.jsonl

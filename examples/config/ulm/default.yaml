@@ -11,6 +11,10 @@ output_json_tts:
   train: /mnt/hdd/GSLM/train_hubert_tts0215.jsonl
   valid: /mnt/hdd/GSLM/valid_hubert_tts0215.jsonl
   test: /mnt/hdd/GSLM/test_hubert_tts0215.jsonl
+output_json_tts_t5:
+  train: hubert_libri/train.jsonl
+  valid: hubert_libri/dev.jsonl
+  test:  hubert_libri/test.jsonl
 output_json:
   train: /mnt/hdd/GSLM/train_hubert.jsonl
   valid: /mnt/hdd/GSLM/valid_hubert.jsonl

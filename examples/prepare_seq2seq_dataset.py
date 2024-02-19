@@ -14,7 +14,6 @@ def main(cfg):
         manifest_path = root/ f"manifest_{subset}.{cfg.ulm.ljspeech.feature_file_suffix}"
         with manifest_path.open() as f: 
             lines = f.readlines()
-            lines = lines[1:] # skip header
         ids = [Path(line.split('|')[0]).stem for line in lines]
         features = [line.split('|')[1].strip() for line in lines]
         feature_dict = dict(zip(ids,features))
