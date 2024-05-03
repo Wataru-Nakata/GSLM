@@ -1,0 +1,45 @@
+_target_: gslm.u2s.dataset.datamodule.dgslmDataModule
+_recursive_: false
+cfg:
+  sample_rate: 22_050
+  train_dataset:
+    _target_: torch.utils.data.ConcatDataset
+    datasets:
+      - _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
+        manifest_path: /home/acf16285io/nakata/fairseq/emnlp/emnlp_manifest.txt/train.tsv
+        resampled_sr: 22_050
+        extracted_feature_path: /home/acf16285io/nakata/fairseq/emnlp/03_preprocess_data/vocoder_dataset_rinna/data.unitA
+        channel: 0
+      - _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
+        manifest_path: /home/acf16285io/nakata/fairseq/emnlp/emnlp_manifest.txt/train.tsv
+        resampled_sr: 22_050
+        extracted_feature_path: /home/acf16285io/nakata/fairseq/emnlp/03_preprocess_data/vocoder_dataset_rinna/data.unitB
+        channel: 1
+  val_dataset:
+    _target_: torch.utils.data.ConcatDataset
+    datasets:
+      - _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
+        manifest_path: /home/acf16285io/nakata/fairseq/emnlp/06_prepare_vocoder_manifest/valid.tsv
+        resampled_sr: 22_050
+        extracted_feature_path: /home/acf16285io/nakata/fairseq/emnlp/03_preprocess_data/vocoder_dataset_rinna/data.unitA
+        channel: 0
+      - _target_: gslm.u2s.dataset.fairseq_manifest_dataset.FairseqManifestDataset
+        manifest_path: /home/acf16285io/nakata/fairseq/emnlp/06_prepare_vocoder_manifest/valid.tsv
+        resampled_sr: 22_050
+        extracted_feature_path: /home/acf16285io/nakata/fairseq/emnlp/03_preprocess_data/vocoder_dataset_rinna/data.unitB
+        channel: 1
+  data:
+    segment_size:
+      train: 50
+      val: 500
+    train_batch_size: 8
+    val_batch_size: 1
+    target_feature: 
+      key: input_feature
+      samples_per_sec: 50
+      bias: 0.0025
+  xvector:
+    model:
+      _target_: speechbrain.pretrained.EncoderClassifier.from_hparams
+      source: "speechbrain/spkrec-xvect-voxceleb"
+    sr: 16_000
