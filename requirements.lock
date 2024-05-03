@@ -5,236 +5,698 @@
 #   pre: false
 #   features: []
 #   all-features: false
+#   with-sources: false
 
 -e file:.
 absl-py==2.0.0
+    # via tensorboard
 accelerate==0.26.1
+    # via gslm
 aiohttp==3.8.6
+    # via datasets
+    # via fsspec
 aiosignal==1.3.1
+    # via aiohttp
 annotated-types==0.6.0
+    # via pydantic
 antlr4-python3-runtime==4.9.3
+    # via hydra-core
+    # via omegaconf
 anyio==3.7.1
+    # via fastapi
+    # via starlette
 appdirs==1.4.4
+    # via wandb
 argbind==0.3.7
+    # via descript-audio-codec
+    # via descript-audiotools
 arrow==1.3.0
+    # via lightning
 asttokens==2.4.1
+    # via stack-data
 async-timeout==4.0.3
+    # via aiohttp
 attrs==23.1.0
+    # via aiohttp
+    # via clldutils
+    # via csvw
+    # via jsonschema
+    # via phonemizer
+    # via referencing
 audioread==3.0.1
+    # via lhotse
+    # via librosa
 babel==2.14.0
+    # via csvw
 backoff==2.2.1
+    # via lightning
 beautifulsoup4==4.12.2
+    # via lightning
 bibtexparser==2.0.0b5
+    # via clldutils
 blessed==1.20.0
+    # via inquirer
 braceexpand==0.1.7
+    # via webdataset
 cachetools==5.3.1
+    # via google-auth
 certifi==2023.7.22
+    # via requests
+    # via sentry-sdk
 cffi==1.16.0
+    # via soundfile
 charset-normalizer==3.3.0
+    # via aiohttp
+    # via requests
 click==8.1.7
+    # via jiwer
+    # via lhotse
+    # via lightning
+    # via lightning-cloud
+    # via uvicorn
+    # via wandb
 clldutils==3.22.1
+    # via segments
 cmake==3.27.6
+    # via triton
 colorama==0.4.6
+    # via csvw
 coloredlogs==15.0.1
+    # via optimum
 colorlog==6.8.0
+    # via clldutils
 contourpy==1.2.0
+    # via matplotlib
 croniter==1.4.1
+    # via lightning
 csvw==3.2.1
+    # via segments
 cycler==0.12.1
+    # via matplotlib
 cython==3.0.4
+    # via pyworld
 cytoolz==0.12.3
+    # via lhotse
 datasets==2.17.0
+    # via gslm
+    # via optimum
 dateutils==0.6.12
+    # via lightning
 decorator==5.1.1
+    # via ipython
+    # via librosa
 deepdiff==6.6.0
+    # via lightning
 descript-audio-codec==1.0.0
+    # via lightning-vocoders
 descript-audiotools==0.7.2
+    # via descript-audio-codec
 dill==0.3.7
+    # via datasets
+    # via multiprocess
+    # via pandarallel
 dlinfo==1.2.1
+    # via phonemizer
 docker-pycreds==0.4.0
+    # via wandb
 docstring-parser==0.15
+    # via argbind
 einops==0.7.0
+    # via descript-audio-codec
 exceptiongroup==1.1.3
+    # via anyio
+    # via ipython
 executing==2.0.1
+    # via stack-data
 fastapi==0.103.2
+    # via lightning
+    # via lightning-cloud
 ffmpy==0.3.1
+    # via descript-audiotools
 filelock==3.12.4
+    # via datasets
+    # via huggingface-hub
+    # via torch
+    # via transformers
+    # via triton
 fire==0.5.0
+    # via randomname
 flatten-dict==0.4.2
+    # via descript-audiotools
 fonttools==4.47.0
+    # via matplotlib
 frozenlist==1.4.0
+    # via aiohttp
+    # via aiosignal
 fsspec==2023.9.2
+    # via datasets
+    # via huggingface-hub
+    # via lightning
+    # via pytorch-lightning
 future==0.18.3
+    # via pyloudnorm
 gitdb==4.0.10
+    # via gitpython
 gitpython==3.1.37
+    # via wandb
 google-auth==2.23.3
+    # via google-auth-oauthlib
+    # via tensorboard
 google-auth-oauthlib==1.0.0
+    # via tensorboard
 grpcio==1.59.0
+    # via tensorboard
 h11==0.14.0
+    # via uvicorn
 huggingface-hub==0.20.3
+    # via accelerate
+    # via datasets
+    # via optimum
+    # via speechbrain
+    # via tokenizers
+    # via transformers
 humanfriendly==10.0
+    # via coloredlogs
 hydra-core==1.3.2
+    # via gslm
+    # via lightning-vocoders
 hyperpyyaml==1.2.2
+    # via speechbrain
 idna==3.4
+    # via anyio
+    # via requests
+    # via yarl
 importlib-resources==6.1.1
+    # via descript-audiotools
 inquirer==3.1.3
+    # via lightning
 intervaltree==3.1.0
+    # via lhotse
 ipython==8.20.0
+    # via descript-audiotools
 isodate==0.6.1
+    # via csvw
+    # via rdflib
 itsdangerous==2.1.2
+    # via starsessions
 jedi==0.19.1
+    # via ipython
 jinja2==3.1.2
+    # via lightning
+    # via torch
 jiwer==3.0.3
+    # via gslm
 joblib==1.3.2
+    # via librosa
+    # via phonemizer
+    # via scikit-learn
+    # via speechbrain
 jsonschema==4.20.0
+    # via csvw
 jsonschema-specifications==2023.12.1
+    # via jsonschema
 julius==0.2.7
+    # via descript-audiotools
 kiwisolver==1.4.5
+    # via matplotlib
 language-tags==1.2.0
+    # via csvw
 lazy-loader==0.3
+    # via librosa
 lhotse==1.20.0
+    # via gslm
 librosa==0.10.1
+    # via descript-audiotools
 lightning==2.0.9.post0
+    # via lightning-vocoders
 lightning-cloud==0.5.39
+    # via lightning
 lightning-utilities==0.9.0
-lightning-vocoders @ git+https://github.com/Wataru-Nakata/ssl-vocoders
+    # via lightning
+    # via pytorch-lightning
+    # via torchmetrics
+lightning-vocoders @ git+https://github.com/Wataru-Nakata/ssl-vocoders@87ee8a4239c587b10b04c8b310684d35a9c64d25
+    # via gslm
 lilcom==1.7
+    # via lhotse
 lit==17.0.2
+    # via triton
 llvmlite==0.41.1
+    # via numba
 lxml==5.1.0
+    # via clldutils
 markdown==3.5
+    # via clldutils
+    # via tensorboard
 markdown-it-py==3.0.0
+    # via rich
 markdown2==2.4.12
+    # via descript-audiotools
 markupsafe==2.1.3
+    # via clldutils
+    # via jinja2
+    # via werkzeug
 matplotlib==3.8.2
+    # via descript-audiotools
 matplotlib-inline==0.1.6
+    # via ipython
 mdurl==0.1.2
+    # via markdown-it-py
 more-itertools==10.2.0
+    # via openai-whisper
 mpmath==1.3.0
+    # via sympy
 msgpack==1.0.7
+    # via librosa
 multidict==6.0.4
+    # via aiohttp
+    # via yarl
 multiprocess==0.70.15
+    # via datasets
 networkx==3.1
+    # via torch
 numba==0.58.1
+    # via librosa
+    # via openai-whisper
 numpy==1.26.0
+    # via accelerate
+    # via contourpy
+    # via datasets
+    # via descript-audio-codec
+    # via descript-audiotools
+    # via lhotse
+    # via librosa
+    # via lightning
+    # via lilcom
+    # via matplotlib
+    # via numba
+    # via openai-whisper
+    # via optimum
+    # via pandas
+    # via pyarrow
+    # via pyloudnorm
+    # via pyreaper
+    # via pystoi
+    # via pytorch-lightning
+    # via pyworld
+    # via scikit-learn
+    # via scipy
+    # via soxr
+    # via speechbrain
+    # via tensorboard
+    # via torch-stoi
+    # via torchmetrics
+    # via transformers
+    # via webdataset
+    # via xvector-jtubespeech
 nvidia-cublas-cu11==11.10.3.66
+    # via nvidia-cudnn-cu11
+    # via nvidia-cusolver-cu11
+    # via torch
 nvidia-cuda-cupti-cu11==11.7.101
+    # via torch
 nvidia-cuda-nvrtc-cu11==11.7.99
+    # via torch
 nvidia-cuda-runtime-cu11==11.7.99
+    # via torch
 nvidia-cudnn-cu11==8.5.0.96
+    # via torch
 nvidia-cufft-cu11==10.9.0.58
+    # via torch
 nvidia-curand-cu11==10.2.10.91
+    # via torch
 nvidia-cusolver-cu11==11.4.0.1
+    # via torch
 nvidia-cusparse-cu11==11.7.4.91
+    # via torch
 nvidia-nccl-cu11==2.14.3
+    # via torch
 nvidia-nvtx-cu11==11.7.91
+    # via torch
 oauthlib==3.2.2
+    # via requests-oauthlib
 omegaconf==2.3.0
-openai-whisper @ git+https://github.com/openai/whisper.git
+    # via hydra-core
+openai-whisper @ git+https://github.com/openai/whisper.git@ba3f3cd54b0e5b8ce1ab3de13e32122d0d5f98ab
+    # via gslm
 optimum==1.16.2
+    # via gslm
 ordered-set==4.1.0
+    # via deepdiff
 packaging==23.2
+    # via accelerate
+    # via datasets
+    # via huggingface-hub
+    # via hydra-core
+    # via lhotse
+    # via lightning
+    # via lightning-utilities
+    # via matplotlib
+    # via optimum
+    # via pooch
+    # via pytorch-lightning
+    # via speechbrain
+    # via transformers
 pandarallel==1.6.5
+    # via lightning-vocoders
 pandas==2.1.1
+    # via datasets
+    # via pandarallel
 parso==0.8.3
+    # via jedi
 pathtools==0.1.2
+    # via wandb
 pexpect==4.9.0
+    # via ipython
 phonemizer==3.2.1
+    # via gslm
 pillow==10.2.0
+    # via matplotlib
 platformdirs==4.1.0
+    # via pooch
 pooch==1.8.0
+    # via librosa
 prompt-toolkit==3.0.43
+    # via ipython
 protobuf==3.19.6
+    # via descript-audiotools
+    # via tensorboard
+    # via transformers
+    # via wandb
 psutil==5.9.5
+    # via accelerate
+    # via lightning
+    # via pandarallel
+    # via wandb
 ptyprocess==0.7.0
+    # via pexpect
 pure-eval==0.2.2
+    # via stack-data
 pyarrow==15.0.0
+    # via datasets
 pyarrow-hotfix==0.6
+    # via datasets
 pyasn1==0.5.0
+    # via pyasn1-modules
+    # via rsa
 pyasn1-modules==0.3.0
+    # via google-auth
 pycparser==2.21
+    # via cffi
 pydantic==2.1.1
+    # via fastapi
+    # via lightning
 pydantic-core==2.4.0
+    # via pydantic
 pygments==2.16.1
+    # via ipython
+    # via rich
 pyjwt==2.8.0
+    # via lightning-cloud
 pylatexenc==2.10
+    # via bibtexparser
+    # via clldutils
 pyloudnorm==0.1.1
+    # via descript-audiotools
 pyparsing==3.1.1
+    # via matplotlib
+    # via rdflib
 pyreaper==0.0.10
+    # via gslm
 pyrootutils==1.0.4
+    # via lightning-vocoders
 pystoi==0.4.1
+    # via descript-audiotools
+    # via torch-stoi
 python-dateutil==2.8.2
+    # via arrow
+    # via clldutils
+    # via croniter
+    # via csvw
+    # via dateutils
+    # via matplotlib
+    # via pandas
 python-dotenv==1.0.0
+    # via pyrootutils
 python-editor==1.0.4
+    # via inquirer
 python-multipart==0.0.6
+    # via lightning
+    # via lightning-cloud
 pytorch-lightning==2.0.9.post0
+    # via lightning
 pytz==2023.3.post1
+    # via dateutils
+    # via pandas
 pyworld==0.3.4
+    # via gslm
 pyyaml==6.0.1
+    # via accelerate
+    # via argbind
+    # via datasets
+    # via huggingface-hub
+    # via hyperpyyaml
+    # via lhotse
+    # via lightning
+    # via omegaconf
+    # via pytorch-lightning
+    # via transformers
+    # via wandb
+    # via webdataset
 randomname==0.2.1
+    # via descript-audiotools
 rapidfuzz==3.6.1
+    # via jiwer
 rdflib==7.0.0
+    # via csvw
 readchar==4.0.5
+    # via inquirer
 referencing==0.32.1
+    # via jsonschema
+    # via jsonschema-specifications
 regex==2023.10.3
+    # via segments
+    # via tiktoken
+    # via transformers
 requests==2.31.0
+    # via csvw
+    # via datasets
+    # via fsspec
+    # via huggingface-hub
+    # via lightning
+    # via lightning-cloud
+    # via pooch
+    # via requests-oauthlib
+    # via tensorboard
+    # via tiktoken
+    # via transformers
+    # via wandb
 requests-oauthlib==1.3.1
+    # via google-auth-oauthlib
 rfc3986==1.5.0
+    # via csvw
 rich==13.6.0
+    # via descript-audiotools
+    # via lightning
+    # via lightning-cloud
 rpds-py==0.16.2
+    # via jsonschema
+    # via referencing
 rsa==4.9
+    # via google-auth
 ruamel-yaml==0.17.35
+    # via hyperpyyaml
 ruamel-yaml-clib==0.2.8
+    # via ruamel-yaml
 safetensors==0.4.1
+    # via accelerate
+    # via transformers
 scikit-learn==1.3.1
+    # via gslm
+    # via librosa
 scipy==1.11.3
+    # via descript-audiotools
+    # via librosa
+    # via pyloudnorm
+    # via pystoi
+    # via scikit-learn
+    # via speechbrain
+    # via xvector-jtubespeech
 segments==2.2.1
+    # via phonemizer
 sentencepiece==0.1.99
+    # via speechbrain
+    # via transformers
 sentry-sdk==1.32.0
+    # via wandb
 setproctitle==1.3.3
-six==1.16.0
-smmap==5.0.1
-sniffio==1.3.0
-sortedcontainers==2.4.0
-soundfile==0.12.1
-soupsieve==2.5
-soxr==0.3.7
-speechbrain==0.5.15
-stack-data==0.6.3
-starlette==0.27.0
-starsessions==1.3.0
-sympy==1.12
-tabulate==0.9.0
-tensorboard==2.13.0
-tensorboard-data-server==0.7.1
-termcolor==2.4.0
-threadpoolctl==3.2.0
-tiktoken==0.5.2
-tokenizers==0.15.0
-toolz==0.12.1
-torch==2.0.1
-torch-stoi==0.2.1
-torchaudio==2.0.2
-torchmetrics==1.2.0
-tqdm==4.66.1
-traitlets==5.11.2
-transformers==4.35.2
-triton==2.0.0
-types-python-dateutil==2.8.19.14
-typing-extensions==4.8.0
-tzdata==2023.3
-uritemplate==4.1.1
-urllib3==2.0.6
-uvicorn==0.23.2
-wandb==0.15.12
-wcwidth==0.2.8
-webdataset==0.2.57
-websocket-client==1.6.4
-websockets==11.0.3
-werkzeug==3.0.0
-wheel==0.41.2
-xvector-jtubespeech==0.0.2
-xxhash==3.4.1
-yarl==1.9.2
-# The following packages are considered to be unsafe in a requirements file:
+    # via wandb
 setuptools==68.2.2
+    # via nvidia-cublas-cu11
+    # via nvidia-cuda-cupti-cu11
+    # via nvidia-cuda-runtime-cu11
+    # via nvidia-curand-cu11
+    # via nvidia-cusparse-cu11
+    # via nvidia-nvtx-cu11
+    # via readchar
+    # via tensorboard
+    # via wandb
+six==1.16.0
+    # via asttokens
+    # via blessed
+    # via docker-pycreds
+    # via fire
+    # via flatten-dict
+    # via isodate
+    # via lightning-cloud
+    # via python-dateutil
+smmap==5.0.1
+    # via gitdb
+sniffio==1.3.0
+    # via anyio
+sortedcontainers==2.4.0
+    # via intervaltree
+soundfile==0.12.1
+    # via descript-audiotools
+    # via lhotse
+    # via librosa
+    # via lightning-vocoders
+soupsieve==2.5
+    # via beautifulsoup4
+soxr==0.3.7
+    # via librosa
+speechbrain==0.5.15
+    # via lightning-vocoders
+stack-data==0.6.3
+    # via ipython
+starlette==0.27.0
+    # via fastapi
+    # via lightning
+    # via starsessions
+starsessions==1.3.0
+    # via lightning
+sympy==1.12
+    # via optimum
+    # via torch
+tabulate==0.9.0
+    # via clldutils
+    # via lhotse
+tensorboard==2.13.0
+    # via descript-audiotools
+    # via lightning-vocoders
+tensorboard-data-server==0.7.1
+    # via tensorboard
+termcolor==2.4.0
+    # via fire
+threadpoolctl==3.2.0
+    # via scikit-learn
+tiktoken==0.5.2
+    # via openai-whisper
+tokenizers==0.15.0
+    # via transformers
+toolz==0.12.1
+    # via cytoolz
+torch==2.0.1
+    # via accelerate
+    # via descript-audio-codec
+    # via descript-audiotools
+    # via julius
+    # via lightning
+    # via lightning-vocoders
+    # via openai-whisper
+    # via optimum
+    # via pytorch-lightning
+    # via speechbrain
+    # via torch-stoi
+    # via torchaudio
+    # via torchmetrics
+    # via triton
+    # via xvector-jtubespeech
+torch-stoi==0.2.1
+    # via descript-audiotools
+torchaudio==2.0.2
+    # via descript-audio-codec
+    # via descript-audiotools
+    # via lightning-vocoders
+    # via speechbrain
+    # via torch-stoi
+    # via xvector-jtubespeech
+torchmetrics==1.2.0
+    # via lightning
+    # via pytorch-lightning
+tqdm==4.66.1
+    # via datasets
+    # via descript-audio-codec
+    # via descript-audiotools
+    # via huggingface-hub
+    # via lhotse
+    # via lightning
+    # via openai-whisper
+    # via pytorch-lightning
+    # via speechbrain
+    # via transformers
+traitlets==5.11.2
+    # via ipython
+    # via lightning
+    # via matplotlib-inline
+transformers==4.35.2
+    # via lightning-vocoders
+    # via optimum
+triton==2.0.0
+    # via openai-whisper
+    # via torch
+types-python-dateutil==2.8.19.14
+    # via arrow
+typing-extensions==4.8.0
+    # via fastapi
+    # via huggingface-hub
+    # via librosa
+    # via lightning
+    # via lightning-utilities
+    # via phonemizer
+    # via pydantic
+    # via pydantic-core
+    # via pytorch-lightning
+    # via torch
+    # via uvicorn
+tzdata==2023.3
+    # via pandas
+uritemplate==4.1.1
+    # via csvw
+urllib3==2.0.6
+    # via lightning
+    # via lightning-cloud
+    # via requests
+    # via sentry-sdk
+uvicorn==0.23.2
+    # via lightning
+    # via lightning-cloud
+wandb==0.15.12
+    # via lightning-vocoders
+wcwidth==0.2.8
+    # via blessed
+    # via prompt-toolkit
+webdataset==0.2.57
+    # via gslm
+    # via lightning-vocoders
+websocket-client==1.6.4
+    # via lightning
+    # via lightning-cloud
+websockets==11.0.3
+    # via lightning
+werkzeug==3.0.0
+    # via tensorboard
+wheel==0.41.2
+    # via nvidia-cublas-cu11
+    # via nvidia-cuda-cupti-cu11
+    # via nvidia-cuda-runtime-cu11
+    # via nvidia-curand-cu11
+    # via nvidia-cusparse-cu11
+    # via nvidia-nvtx-cu11
+    # via tensorboard
+xvector-jtubespeech==0.0.2
+    # via lightning-vocoders
+xxhash==3.4.1
+    # via datasets
+yarl==1.9.2
+    # via aiohttp
